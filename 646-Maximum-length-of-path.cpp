@@ -28,19 +28,13 @@ public:
                     temp = (temp < num[j])? num[j] : temp;
                     flag = true;
                 }
-                    
                 else break;
             }
             if(flag)
             {
                 num[i] = temp + 1;
-            maxN = (maxN < num[i])? num[i] : maxN;
+                maxN = (maxN < num[i])? num[i] : maxN;
             }
-            
-        }
-        for(int i = 0; i < pairs.size(); i++)
-        {
-            cout << pairs[i][0] <<" "<< pairs[i][1] << " " << num[i] << endl;
         }
         return maxN;
     }
