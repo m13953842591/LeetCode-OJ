@@ -15,7 +15,7 @@ ListNode* rotateRight(ListNode* head, int k) {
     k = k % n;
     int v[n];
     
-    for( i = k, p = head; p != NULL; p = p->next, i = (i + 1)%n)
+    for(i = k, p = head; p != NULL; p = p->next, i = (i + 1)%n)
     {
         v[i] = p->val;
     }
