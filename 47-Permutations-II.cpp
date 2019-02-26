@@ -1,46 +1,28 @@
-// underfinished
 #include <iostream>
 #include <vector>
+#include <map>
 #include <algorithm>
-using namespace std;
+using namespace std; 
 
-void recursion(vector<int> nums, int begin, vector<vector<int>> &res)
+void dfs(vector<vector<int>> &res, map<int, int>& dict, vector<int>& current, int depth)
 {
-    if(begin >= nums.size() - 1)
+    if(depth == 0)
     {
-        res.push_back(nums);
+        res.push_back(current);
         return;
     }
-    for(int i = begin; i < nums.size(); i++)
-    {
-        swap(nums[i], nums[begin]);
-    }
-    
+    for()
 }
-
-vector<vector<int>> permuteUnique(vector<int> & nums)
-{
-    vector<vector<int>> res;
+vector<vector<int>> permuteUnique(vector<int>& nums) {
     sort(nums.begin(), nums.end());
-    recursion(nums, 0, res);
-    return res;
-}
-
-int main(int argc, char const *argv[])
-{
-    int x[4]{1,2,3,4};
-    vector<int> nums(x, x + sizeof(x) / sizeof(int));
-    for(auto it : nums)
-    cout << it << ' ';
-    vector<vector<int>> res = permuteUnique(nums);
-    for(auto vec : res)
+    map<int, int> dict;
+    vector<vector<int>> res;
+    for(int i = 0; i < nums.size(); i++)
     {
-        for(auto it : vec)
-        {
-            cout << it << ' '; 
-        }
-        cout << endl;
+        if(dict.find(nums[i]) != dict.end())
+            dict[nums[i]] += 1;
+        else dict[nums[i]] = 1;
     }
-    return 0;
-}
+    dfs(res, dict, )
 
+}
