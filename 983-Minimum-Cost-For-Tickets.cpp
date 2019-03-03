@@ -20,12 +20,11 @@ int mincostTickets(vector<int>& days, vector<int>& costs) {
                 days_30 = k;
         }
         opt[i] = opt[i + 1] + costs[0];
+        
         if(days[end] - days[i] + 1 <= 30)
             opt[i] = min(opt[i], costs[2]);
         if(days[end] - days[i] + 1 <= 7)
             opt[i] = min(opt[i], costs[1]);
-    
-            
         if(days_7 > 0)
             opt[i] = min(opt[i], opt[days_7] + costs[1]);
         if(days_30 > 0)
