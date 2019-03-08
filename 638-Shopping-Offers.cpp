@@ -2,35 +2,40 @@
 #include <vector>
 using namespace std;
 
-
+int operator*(const vector<int>& a, const vector<int>& b)
+{
+    int res = 0;
+    for(int i = 0; i < a.size(); i++)
+        res += a[i] * b[i];
+    return res; 
+}
+bool operator>=(const vector<int>& a, const vector<int>& b)
+{
+    for(int i = 0; i < a.size(); i++)
+        if(a[i] < b[i]) return false;
+    return true; 
+}
+void operator+=(vector<int> &a, const vector<int>&b)
+{
+    for(int i = 0; i < a.size(); i++)
+        a[i] += b[i];
+}
+void operator-=(vector<int> &a, const vector<int>&b)
+{
+    for(int i = 0; i < a.size(); i++)
+        a[i] -= b[i];
+}
 int shoppingOffers(vector<int>& price, vector<vector<int>>& special, vector<int>& needs) {
-    int opt = INT32_MAX;
-    if(special.empty()) 
+    int cost = price * needs;
+    for(auto & spe : special)
     {
-        opt = 0;
-        for(int i = 0; i < price.size(); i++)
-            opt += needs[i] * price[i];
-        return opt;
+        if(spe.back() > cost) continue;
+        if(needs >= spe)
+        {
+            needs -= spe;
+            cost = min(cost, spe.back() + shoppingOffers(price, special, needs));
+            needs += spe;
+        }
     }
-
-    vector<int> cur_offer = special.back();
-
-    special.pop_back();
-
-    opt = shoppingOffers(price, special, needs);
-    int cur_offer_num = 1, 
-        cur_offer_price = cur_offer.back();
-
-    while(true){
-
-        for(int i = 0; i < needs.size(); i++)
-            if(needs[i] < cur_offer[i]) break;
-        for(int i = 0; i < needs.size(); i++)
-            needs[i] -= cur_offer[i];
-        opt = min(opt, shoppingOffers(price, special, needs) + cur_offer_num * cur_offer_price);
-        cur_offer_num++;
-    }
-
-    special.push_back(cur_offer);
-    return opt;
+    return cost;
 }
