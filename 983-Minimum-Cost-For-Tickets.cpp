@@ -3,7 +3,6 @@
 
 using namespace std;
 
-
 int mincostTickets(vector<int>& days, vector<int>& costs) {
     int opt[days.size() + 1] = {0};
     int i, k, days_7, days_30, end = days.size() - 1; 
@@ -36,6 +35,7 @@ int mincostTickets(vector<int>& days, vector<int>& costs) {
 
     return opt[0];
 }
+
 
 int main()
 {
